@@ -3136,7 +3136,7 @@ class TestXFormViewSet(TestAbstractViewSet):
                 '\ufeffage,name,meta/instanceID,_id,_uuid,_submission_time,'
                 '_tags,_notes,_version,_duration,_submitted_by,_total_media,'
                 '_media_count,_media_all_received,'
-                '_review_status,_review_comment\n\ufeff#age,,,,,,,,,,,,,,,\n,'
+                '_review_status,_review_comment\n\ufeff#age,,,,,,,,,,,,,,,\n'
                 '\ufeff29,Lionel Messi,'
                 'uuid:74ee8b73-48aa-4ced-9072-862f93d49c16,%s,'
                 '74ee8b73-48aa-4ced-9072-862f93d49c16,2013-02-18T15:54:01,,,'
@@ -3644,7 +3644,6 @@ class TestXFormViewSet(TestAbstractViewSet):
         self.assertEqual(ext, '.csv')
 
         content = get_response_content(response)
-
         if test_data and field:
             reader = csv.DictReader(StringIO(content))
             self.assertEqual([i[field] for i in reader], test_data)
@@ -3923,7 +3922,7 @@ class TestXFormViewSet(TestAbstractViewSet):
                     csv_reader = csv.reader(f)
                     headers = next(csv_reader)
                     self.assertIn(
-                        'Is ambulance available daily or weekly?', headers
+                        'frequency_to_referral_facility', headers
                     )
 
                 request = self.factory.get(
@@ -4021,7 +4020,7 @@ class TestXFormViewSet(TestAbstractViewSet):
             response = view(request, pk=self.xform.pk, format='csv')
             self.assertEqual(response.status_code, 200)
             expected_data = ['n/a']
-            key = 'Is ambulance available daily or weekly?'
+            key = 'frequency_to_referral_facility'
             self._validate_csv_export(response, None, key, expected_data)
 
             # assert that the next request without the options doesn't result
