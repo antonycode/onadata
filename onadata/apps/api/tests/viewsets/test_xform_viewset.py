@@ -3135,7 +3135,7 @@ class TestXFormViewSet(TestAbstractViewSet):
             expected_content_py3 = (
                 '\ufeffage,name,meta/instanceID,_id,_uuid,_submission_time,'
                 '_tags,_notes,_version,_duration,_submitted_by,_total_media,'
-                '_media_count,_media_all_received'
+                '_media_count,_media_all_received,'
                 '_review_status,_review_comment\n\ufeff#age,,,,,,,,,,,,,,,\n,'
                 '\ufeff29,Lionel Messi,'
                 'uuid:74ee8b73-48aa-4ced-9072-862f93d49c16,%s,'
@@ -3233,14 +3233,13 @@ class TestXFormViewSet(TestAbstractViewSet):
             expected_content = (
                 'age,name,meta/instanceID,_id,_uuid,_submission_time,_tags,'
                 '_notes,_version,_duration,_submitted_by,_total_media,'
-                '_media_count,_review_status,_review_comment,'
-                '_media_all_received\n'
+                '_media_count,_media_all_received,'
+                '_review_status,_review_comment\n'
                 '#age,,,,,,,,,,,,,,,\n'
                 '29,Lionel Messi,uuid:74ee8b73-48aa-4ced-9072-862f93d49c16,'
                 '%s,74ee8b73-48aa-4ced-9072-862f93d49c16,2013-02-18T15:54:01'
-                ',,,201604121155,,bob,0,0,n/a,n/a,True\n' % data_id
+                ',,,201604121155,,bob,0,0,True,n/a,n/a\n' % data_id
             )
-
             self.assertEqual(expected_content, content)
 
             headers = dict(response.items())
