@@ -3921,9 +3921,8 @@ class TestXFormViewSet(TestAbstractViewSet):
                 with default_storage.open(export.filepath, 'r') as f:
                     csv_reader = csv.reader(f)
                     headers = next(csv_reader)
-                    self.assertIn(
-                        'frequency_to_referral_facility', headers
-                    )
+                    header = 'transport/available_transportation_types_to_referral_facility/ambulance'  # noqa
+                    self.assertIn(header, headers)
 
                 request = self.factory.get(
                     '/',
@@ -3935,9 +3934,8 @@ class TestXFormViewSet(TestAbstractViewSet):
                     c.decode('utf-8') for c in response.streaming_content]))
                 csv_reader = csv.reader(f)
                 headers = next(csv_reader)
-                self.assertIn(
-                    'Is ambulance available daily or weekly?', headers
-                )
+                header = 'transport/available_transportation_types_to_referral_facility/ambulance'  # noqa
+                self.assertIn(header, headers)
 
     def test_csv_exports_w_images_link(self):
         with HTTMock(enketo_mock):
